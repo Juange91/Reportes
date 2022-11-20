@@ -1,6 +1,4 @@
-<?php
-ob_start();
-?>
+
 <?php
 
 if (isset($_POST['edificio'])){$edificio= $_POST['edificio'];}
@@ -226,22 +224,3 @@ if (isset($_POST['edificio'])){$edificio= $_POST['edificio'];}
 <script>js/bootstrap.min.js</script>
 </body>
 </html>
-<?php
-$html = ob_get_clean();
-//echo $html;
-
-require_once 'autoload.inc.php';
-use Dompdf\Dompdf;
-$dompdf = new Dompdf();
-
-$options = $dompdf->getOptions();
-$options->set(array('isRemoteEnabled' => true));
-$dompdf->setOptions($options);
-
-$dompdf->loadHtml($html);
-$dompdf->setPaper('letter');
-$dompdf->render();
-
-// Output the generated PDF to Browser
-$dompdf->stream("file_.php", array("Attachment" => false));
-?>
